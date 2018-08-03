@@ -1,12 +1,41 @@
-﻿namespace MessageCodeGenerator
+﻿using System.Collections.Generic;
+
+namespace MessageCodeGenerator
 {
     public interface IDefinitionsSource
     {
-        Definitions Definitions { get; }
+        IDefinitions Definitions { get; }
     }
 
-    public class DefinitionsSource : IDefinitionsSource
+    public class TestDefinitionsSource : IDefinitionsSource
     {
-        public Definitions Definitions { get; }
+        public IDefinitions Definitions => new Definitions
+        {
+            Namespaces =
+            {
+                new Namespace
+                {
+                    Name = "Namespace1.Namespace2",
+                    Messages = new List<IMessage>
+                    {
+                        new Message
+                        {
+                            Name = "Message1"
+                        },
+                        new Message
+                        {
+                            Name = "Message2"
+                        }
+                    },
+                    Namespaces = new List<INamespace>
+                    {
+                        new Namespace
+                        {
+                            Name = "Namespace3"
+                        }
+                    }
+                }
+            }
+        };
     }
 }

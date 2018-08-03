@@ -1,14 +1,26 @@
-﻿namespace MessageCodeGenerator
+﻿using System.Collections.Generic;
+using System.Linq;
+
+namespace MessageCodeGenerator
 {
     public interface ICodeGenerator
     {
-        void GeneratorCode(IDefinitions definitions);
+        void GenerateCode(IEnumerable<IDefinitionsSource> definitionsSources);
     }
 
     public class CodeGenerator : ICodeGenerator
     {
-        public void GeneratorCode(IDefinitions definitions)
+        public CodeGenerator(IEnumerable<ILanguageCodeGenerator> languageCodeGenerators)
         {
+            LanguageCodeGenerators = languageCodeGenerators;
+        }
+
+        private IEnumerable<ILanguageCodeGenerator> LanguageCodeGenerators { get; }
+
+        public void GenerateCode(IEnumerable<IDefinitionsSource> definitionsSources)
+        {
+            var definitions = definitionsSources.Select(x => x.Definitions);
+            LanguageCodeGenerators.ToList().ForEach(x => x.GenerateCode(definitions));
         }
     }
 }
