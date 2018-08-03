@@ -25,6 +25,7 @@ namespace MessageCodeGenerator
             // They will likely be constructed by factories because they’ll need to
             // know information like the path to a file containing definitions.
             var definitionsSource = new TestDefinitionsSource();
+            var d = definitionsSource.Definitions;
 
             generator.GenerateCode(new[] {definitionsSource});
         }

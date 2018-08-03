@@ -4,11 +4,11 @@ namespace MessageCodeGenerator
 {
     public interface IDefinitions
     {
-        List<INamespace> Namespaces { get; }
+        IEnumerable<INamespace> Namespaces { get; set; }
     }
 
     public class Definitions : IDefinitions
     {
-        public List<INamespace> Namespaces { get; }
+        public IEnumerable<INamespace> Namespaces { get; set; }
     }
 }

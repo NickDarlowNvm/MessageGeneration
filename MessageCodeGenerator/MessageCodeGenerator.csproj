@@ -6,8 +6,15 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Handlebars.Net" Version="1.9.5" />
     <PackageReference Include="Ninject" Version="3.3.4" />
     <PackageReference Include="ninject.extensions.conventions" Version="3.3.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="Templates\Message.template">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
 
 </Project>

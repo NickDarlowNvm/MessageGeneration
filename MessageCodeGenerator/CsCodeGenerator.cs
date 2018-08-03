@@ -1,23 +1,30 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using HandlebarsDotNet;
 
 namespace MessageCodeGenerator
 {
     public class CsCodeGenerator : ILanguageCodeGenerator
     {
-        public void GenerateCode(IEnumerable<IDefinitions> definitions) => definitions.ToList().ForEach(GenerateDefinitions);
+        private Func<object, string> MessageTemplate { get; } = Handlebars.Compile(File.ReadAllText("Templates/Message.template"));
 
-        private void GenerateDefinitions(IDefinitions definitions) => definitions.Namespaces.ForEach(GenerateNamespace);
+        public void GenerateCode(IEnumerable<IDefinitions> definitions) =>
+            definitions?.ToList().ForEach(GenerateDefinitions);
+
+        private void GenerateDefinitions(IDefinitions definitions) =>
+            definitions.Namespaces?.ToList().ForEach(GenerateNamespace);
 
         private void GenerateNamespace(INamespace nspace)
         {
-            nspace.Messages.ForEach(GenerateMessage);
-            nspace.Namespaces.ForEach(GenerateNamespace);
+            nspace.Messages?.ToList().ForEach(GenerateMessage);
+            nspace.Namespaces?.ToList().ForEach(GenerateNamespace);
         }
 
         private void GenerateMessage(IMessage message)
         {
-
+            File.WriteAllText($"{message.Name}.cs", MessageTemplate(message));
         }
     }
 }

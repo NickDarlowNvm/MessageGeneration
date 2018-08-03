@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-
-namespace MessageCodeGenerator
+﻿namespace MessageCodeGenerator
 {
     public interface IDefinitionsSource
     {
@@ -11,27 +9,16 @@ namespace MessageCodeGenerator
     {
         public IDefinitions Definitions => new Definitions
         {
-            Namespaces =
+            Namespaces = new[]
             {
                 new Namespace
                 {
                     Name = "Namespace1.Namespace2",
-                    Messages = new List<IMessage>
+                    Messages = new[]
                     {
                         new Message
                         {
                             Name = "Message1"
-                        },
-                        new Message
-                        {
-                            Name = "Message2"
-                        }
-                    },
-                    Namespaces = new List<INamespace>
-                    {
-                        new Namespace
-                        {
-                            Name = "Namespace3"
                         }
                     }
                 }
