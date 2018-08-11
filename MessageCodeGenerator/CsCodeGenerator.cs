@@ -2,8 +2,11 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Security.Cryptography;
+using System.Text;
 using HandlebarsDotNet;
 using MessageCodeGenerator.Model;
+using Newtonsoft.Json;
 
 namespace MessageCodeGenerator
 {
@@ -36,11 +39,17 @@ namespace MessageCodeGenerator
         {
             Name = message.Name;
             Properties = message.Properties?.Select(property => new CsProperty(property));
+
+            var json = JsonConvert.SerializeObject(message);
+            var bytes = MD5.Create().ComputeHash(Encoding.UTF8.GetBytes(json));
+            Schema = bytes.Select(b => b.ToString("X2")).Aggregate((s1, s2) => s1 + s2);
         }
 
-        public string Name { get; set; }
+        public string Name { get; }
 
-        public IEnumerable<CsProperty> Properties { get; set; }
+        public IEnumerable<CsProperty> Properties { get; }
+
+        public string Schema { get; }
     }
 
     public class CsProperty
@@ -51,9 +60,9 @@ namespace MessageCodeGenerator
             Type = PropertyTypeToString(property.Type);
         }
 
-        public string Name { get; set; }
+        public string Name { get; }
 
-        public string Type { get; set; }
+        public string Type { get; }
 
         public static string PropertyTypeToString(PropertyType propertyType)
         {

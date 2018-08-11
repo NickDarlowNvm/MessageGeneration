@@ -2,6 +2,8 @@
 {
     public class {{Name}}
     {
+		public static readonly string Schema = "{{Schema}}";
+
 		{{#each Properties}}
 		public {{Type}} {{Name}} { get; set; }
 		{{/each}}

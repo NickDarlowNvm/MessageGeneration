@@ -13,9 +13,22 @@ namespace MessageCodeGenerator
         {
             get
             {
-                var messageWithNoProperties = new Message
+                var messageWithBasicProperties = new Message
                 {
-                    Name = "MessageWithNoProperties"
+                    Name = "MessageWithBasicProperties",
+                    Properties = new[]
+                    {
+                        new Property
+                        {
+                            Name = "IntProperty",
+                            Type = new PropertyType {Type = PropertyTypeEnum.Integer}
+                        },
+                        new Property
+                        {
+                            Name = "StringProperty",
+                            Type = new PropertyType {Type = PropertyTypeEnum.String}
+                        }
+                    }
                 };
 
                 return new Definitions
@@ -27,24 +40,11 @@ namespace MessageCodeGenerator
                             Name = "Namespace1.Namespace2",
                             Messages = new[]
                             {
-                                messageWithNoProperties,
                                 new Message
                                 {
-                                    Name = "MessageWithBasicProperties",
-                                    Properties = new[]
-                                    {
-                                        new Property
-                                        {
-                                            Name = "IntProperty",
-                                            Type = new PropertyType {Type = PropertyTypeEnum.Integer}
-                                        },
-                                        new Property
-                                        {
-                                            Name = "StringProperty",
-                                            Type = new PropertyType {Type = PropertyTypeEnum.String}
-                                        }
-                                    }
+                                    Name = "MessageWithNoProperties"
                                 },
+                                messageWithBasicProperties,
                                 new Message
                                 {
                                     Name = "MessageWithMessageProperty",
@@ -53,7 +53,7 @@ namespace MessageCodeGenerator
                                         new Property
                                         {
                                             Name = "MessageProperty",
-                                            Type = new PropertyType {Message = messageWithNoProperties}
+                                            Type = new PropertyType {Message = messageWithBasicProperties}
                                         }
                                     }
                                 }
