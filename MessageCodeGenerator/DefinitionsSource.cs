@@ -2,12 +2,12 @@
 {
     public interface IDefinitionsSource
     {
-        IDefinitions Definitions { get; }
+        Definitions Definitions { get; }
     }
 
     public class TestDefinitionsSource : IDefinitionsSource
     {
-        public IDefinitions Definitions => new Definitions
+        public Definitions Definitions => new Definitions
         {
             Namespaces = new[]
             {

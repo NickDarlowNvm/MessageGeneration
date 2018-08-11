@@ -10,19 +10,19 @@ namespace MessageCodeGenerator
     {
         private Func<object, string> MessageTemplate { get; } = Handlebars.Compile(File.ReadAllText("Templates/Message.template"));
 
-        public void GenerateCode(IEnumerable<IDefinitions> definitions) =>
+        public void GenerateCode(IEnumerable<Definitions> definitions) =>
             definitions?.ToList().ForEach(GenerateDefinitions);
 
-        private void GenerateDefinitions(IDefinitions definitions) =>
+        private void GenerateDefinitions(Definitions definitions) =>
             definitions.Namespaces?.ToList().ForEach(GenerateNamespace);
 
-        private void GenerateNamespace(INamespace nspace)
+        private void GenerateNamespace(Namespace nspace)
         {
             nspace.Messages?.ToList().ForEach(GenerateMessage);
             nspace.Namespaces?.ToList().ForEach(GenerateNamespace);
         }
 
-        private void GenerateMessage(IMessage message)
+        private void GenerateMessage(Message message)
         {
             File.WriteAllText($"{message.Name}.cs", MessageTemplate(message));
         }

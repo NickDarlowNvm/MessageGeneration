@@ -22,10 +22,9 @@ namespace MessageCodeGenerator
             var generator = kernel.Get<ICodeGenerator>();
 
             // I don’t anticipate definition sources to be constructed using Ninject.
-            // They will likely be constructed by factories because they’ll need to
+            // They will likely be constructed by factories because they'll need to
             // know information like the path to a file containing definitions.
             var definitionsSource = new TestDefinitionsSource();
-            var d = definitionsSource.Definitions;
 
             generator.GenerateCode(new[] {definitionsSource});
         }

@@ -2,13 +2,8 @@
 
 namespace MessageCodeGenerator
 {
-    public interface IDefinitions
+    public class Definitions
     {
-        IEnumerable<INamespace> Namespaces { get; set; }
-    }
-
-    public class Definitions : IDefinitions
-    {
-        public IEnumerable<INamespace> Namespaces { get; set; }
+        public IEnumerable<Namespace> Namespaces { get; set; }
     }
 }

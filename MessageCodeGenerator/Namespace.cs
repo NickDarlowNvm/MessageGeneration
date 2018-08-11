@@ -2,17 +2,10 @@
 
 namespace MessageCodeGenerator
 {
-    public interface INamespace
-    {
-        string Name { get; set; }
-        IEnumerable<IMessage> Messages { get; set; }
-        IEnumerable<INamespace> Namespaces { get; set; }
-    }
-
-    public class Namespace : INamespace
+    public class Namespace
     {
         public string Name { get; set; }
-        public IEnumerable<IMessage> Messages { get; set; }
-        public IEnumerable<INamespace> Namespaces { get; set; }
+        public IEnumerable<Message> Messages { get; set; }
+        public IEnumerable<Namespace> Namespaces { get; set; }
     }
 }

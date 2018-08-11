@@ -1,11 +1,6 @@
 ﻿namespace MessageCodeGenerator
 {
-    public interface IMessage
-    {
-        string Name { get; set; }
-    }
-
-    public class Message : IMessage
+    public class Message
     {
         public string Name { get; set; }
     }

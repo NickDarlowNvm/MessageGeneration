@@ -4,6 +4,6 @@ namespace MessageCodeGenerator
 {
     public interface ILanguageCodeGenerator
     {
-        void GenerateCode(IEnumerable<IDefinitions> definitions);
+        void GenerateCode(IEnumerable<Definitions> definitions);
     }
 }
