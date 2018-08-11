@@ -1,4 +1,6 @@
-﻿namespace MessageCodeGenerator
+﻿using MessageCodeGenerator.Model;
+
+namespace MessageCodeGenerator
 {
     public interface IDefinitionsSource
     {
@@ -7,22 +9,59 @@
 
     public class TestDefinitionsSource : IDefinitionsSource
     {
-        public Definitions Definitions => new Definitions
+        public Definitions Definitions
         {
-            Namespaces = new[]
+            get
             {
-                new Namespace
+                var messageWithNoProperties = new Message
                 {
-                    Name = "Namespace1.Namespace2",
-                    Messages = new[]
+                    Name = "MessageWithNoProperties"
+                };
+
+                return new Definitions
+                {
+                    Namespaces = new[]
                     {
-                        new Message
+                        new Namespace
                         {
-                            Name = "Message1"
+                            Name = "Namespace1.Namespace2",
+                            Messages = new[]
+                            {
+                                messageWithNoProperties,
+                                new Message
+                                {
+                                    Name = "MessageWithBasicProperties",
+                                    Properties = new[]
+                                    {
+                                        new Property
+                                        {
+                                            Name = "IntProperty",
+                                            Type = new PropertyType {Type = PropertyTypeEnum.Integer}
+                                        },
+                                        new Property
+                                        {
+                                            Name = "StringProperty",
+                                            Type = new PropertyType {Type = PropertyTypeEnum.String}
+                                        }
+                                    }
+                                },
+                                new Message
+                                {
+                                    Name = "MessageWithMessageProperty",
+                                    Properties = new[]
+                                    {
+                                        new Property
+                                        {
+                                            Name = "MessageProperty",
+                                            Type = new PropertyType {Message = messageWithNoProperties}
+                                        }
+                                    }
+                                }
+                            }
                         }
                     }
-                }
+                };
             }
-        };
+        }
     }
 }

@@ -12,7 +12,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Update="Templates\Message.template">
+    <None Update="CsTemplates\Message.template">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>
