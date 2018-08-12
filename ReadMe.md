@@ -25,7 +25,7 @@ kernel.Bind(x => x
 
 ## Templating
 
-The [Handlebars.net](https://github.com/rexm/Handlebars.Net) library is used for templating. Templates for generated C# code is found in directory `CsTemplates`.
+The [Handlebars.net](https://github.com/rexm/Handlebars.Net) library is used for templating. Templates for generating C# code is found in directory `CsTemplates`.
 
 ```
 namespace ToDo
