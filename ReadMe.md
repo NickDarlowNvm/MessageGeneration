@@ -1,6 +1,6 @@
 # Message Generation
 
-This prototype explores generation of data classes for messaging between applications. In particular it demonstrates
+This prototype explores generation of data classes for messaging between applications. It demonstrates
 
  1. Use of dependency injection to autowire language specific code generators
  1. Use of a templating library
